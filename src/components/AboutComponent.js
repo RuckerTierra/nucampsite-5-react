@@ -2,12 +2,32 @@ import React from 'react';
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
+function RenderPartner({partner}){
+// i ran into an issue for task 3 because I had 'partners' instead of 'partner' 
+    if (partner){
+        return(
+            <React.Fragment>
+                <Media object src={partner.image} alt={partner.name} width="150" />
+                <Media body className="ml-5 mb-4">
+                    <Media heading >{partner.name}</Media>
+                    {partner.description}
+                </Media>
+            </React.Fragment>
+        )
+    } return(
+        <div></div>
+    )
+}
+
 
 function About(props) {
 
     const partners = props.partners.map(partner => {
         return (
-            <h5>{partner.name}</h5>
+            <Media tag="li" key={partner.id}>
+                {/* i also ran into issues with this as well. i tried everything: 'this.state.partners', 'this.props.partners', 'props.partners'   */}
+                <RenderPartner partner={partner} />
+            </Media>
         );
     });
 
