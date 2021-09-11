@@ -7,30 +7,18 @@ import Home from "./HomeComponent";
 import Contact from "./ContactComponent";
 import About from "./AboutComponent";
 import { Switch, Route, Redirect, withRouter } from "react-router-dom";
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 
-
-
-const mapStateToProps = state => {
-  return{
+const mapStateToProps = (state) => {
+  return {
     campsites: state.campsites,
     comments: state.comments,
     partners: state.partners,
-    promotions: state.promotions
-  }
-}
+    promotions: state.promotions,
+  };
+};
 
 class Main extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      campsites: CAMPSITES,
-      comments: COMMENTS,
-      partners: PARTNERS,
-      promotions: PROMOTIONS,
-    };
-  }
-
   render() {
     const HomePage = () => {
       return (
@@ -73,7 +61,11 @@ class Main extends Component {
           />
           <Route path="/directory/:campsiteId" component={CampsiteWithId} />
           <Route exact path="/contactus" component={Contact} />
-          <Route exact path="/aboutus" render={() => <About partners={this.props.partners} />}  />
+          <Route
+            exact
+            path="/aboutus"
+            render={() => <About partners={this.props.partners} />}
+          />
           <Redirect to="/home" />
         </Switch>
         <Footer />
@@ -82,4 +74,4 @@ class Main extends Component {
   }
 }
 
-export default connect(mapStateToProps)(Main);
+export default withRouter(connect(mapStateToProps)(Main));
